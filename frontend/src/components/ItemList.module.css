@@ -1,0 +1,115 @@
+/* frontend/src/components/ItemList.module.css */
+
+.dashboardContainer {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    max-width: 1000px; /* Wider container for items */
+    margin: 20px auto;
+    text-align: center;
+}
+
+.heading {
+    color: #0056b3;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.sectionHeading {
+    color: #007bff;
+    font-size: 1.6em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 2px solid #e0f2f7;
+    padding-bottom: 8px;
+}
+
+.itemListGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 25px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.itemCard {
+    background-color: #f8f9fa;
+    border: 1px solid #cceeff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.itemCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.itemCardTitle {
+    color: #333;
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.itemCardDescription {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit description to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* ADD THIS LINE FOR COMPATIBILITY */
+    line-clamp: 3; /* Standard property */
+}
+
+.itemCardType {
+    font-size: 0.85em;
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.itemCardActions {
+    margin-top: auto; /* Push actions to the bottom */
+    text-align: right;
+}
+
+.viewDetailsButton {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.viewDetailsButton:hover {
+    background-color: #218838;
+}
+
+.loadingMessage, .errorMessage {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 50px;
+    color: #666;
+}
+.errorMessage {
+    color: #dc3545;
+}

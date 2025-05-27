@@ -1,0 +1,114 @@
+/* Basic CSS Reset & Global Styles */
+:root {
+  font-family: 'Roboto', sans-serif; /* We'll add Roboto font later */
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #e0f2f7; /* Light blue background as in previous demo */
+  color: #333; /* Dark text for readability */
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%; /* Ensure root takes full width */
+}
+
+/* Basic button styles */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+  margin: 0.5em;
+}
+button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Basic input styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #b3e0ff;
+  border-radius: 6px;
+  box-sizing: border-box; /* Include padding in width */
+  font-size: 1em;
+}
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* General container styles */
+.container {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #cceeff;
+  text-align: left; /* Align text within container */
+}
+
+h1, h2, h3 {
+  color: #0056b3;
+  text-align: center;
+  margin-top: 0;
+}
+
+h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.error-message {
+    color: #dc3545; /* Red for errors */
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.success-message {
+    color: #28a745; /* Green for success */
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
