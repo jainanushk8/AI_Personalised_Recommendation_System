@@ -2,7 +2,7 @@
 console.log('ITEM ROUTES FILE LOADED - THIS IS A TEST'); // Keep for now, can remove later
 const express = require('express');
 const router = express.Router();
-const { getAllItems, getItemById, createItem, updateItem, deleteItem } = require('../controllers/item.controller'); // Import deleteItem
+const { getAllItems, getItemById, createItem, updateItem, deleteItem, findDuplicates } = require('../controllers/item.controller'); // Import findDuplicates
 const { authenticate, authorize } = require('../middlewares/auth.middleware');
 
 // Route to create a new item
@@ -18,11 +18,14 @@ router.get('/items/:id', authenticate, getItemById);
 router.put('/items/:id', authenticate, /* authorize(['admin']), */ updateItem);
 
 // New route to delete an item by ID
-// Apply authenticate and optionally authorize (e.g., only 'admin' can delete)
 router.delete('/items/:id', authenticate, /* authorize(['admin']), */ deleteItem);
 
+// NEW ROUTE TO FIND DUPLICATE ITEMS - ADD THIS BLOCK
+// I'm assuming you want this protected, so I've added 'authenticate'
+router.get('/items/duplicates', authenticate, findDuplicates); // <--- ADD THIS HERE
+
 // router.get('/test', (req, res) => {
-//   res.send('Test route is working!');
+//   res.send('Test route is working!');
 // });
 
 module.exports = router;

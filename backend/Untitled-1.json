@@ -1,1 +1,44 @@
 {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODJhMGQyYmFlZTRjMmEyZWEwMzVlMGMiLCJpYXQiOjE3NDg2MjA2MzUsImV4cCI6MTc0ODYyNDIzNX0.LooVfz6i0Payw8E3HRoQuYCPJERigHbMZa4BipCOqOc","user":{"_id":"682a0d2baee4c2a2ea035e0c","username":"testpowershell","email":"testpowershell@example.com","role":"User"}}
+
+// for create a new user
+$newUsername = "TestUser42"; $newEmail = "testuser42@example.com"; $newPassword = "SecureP@ssw0rd!42"; $registrationData = @{username = $newUsername; email = $newEmail; password = $newPassword;} | ConvertTo-Json; Invoke-RestMethod -Uri "http://localhost:5000/auth/signup" -Method POST -Headers @{"Content-Type" = "application/json"} -Body $registrationData
+
+//for login new user and get token 
+# --- Define the login credentials ---
+$loginEmail = "testuser42@example.com"
+$loginPassword = "SecureP@ssw0rd!42"
+
+# --- Prepare the login request body ---
+$loginData = @{
+    email = $loginEmail;
+    password = $loginPassword;
+} | ConvertTo-Json
+
+# --- Call the login API and capture the response ---
+$loginResponse = Invoke-RestMethod -Uri "http://localhost:5000/auth/login" `
+    -Method POST `
+    -Headers @{"Content-Type" = "application/json"} `
+    -Body $loginData
+
+# --- Extract the token from the response ---
+$jwtToken = $loginResponse.token
+
+Write-Host "New JWT Token captured: $($jwtToken)"
+
+// for adding item to the cart
+$item11Data = @{
+    title = "The Ethical Implications of Generative AI"
+    content = "An article discussing bias, copyright, and misuse concerns with tools like ChatGPT and Midjourney."
+    type = "article"
+    tags = @("AI", "ethics", "generative AI", "bias", "future")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:5000/items" `
+    -Method POST `
+    -Headers @{
+        "Content-Type" = "application/json";
+        Authorization = "Bearer $($jwtToken)"
+    } `
+    -Body $item11Data
+Write-Host "Added 'The Ethical Implications of Generative AI'."
+

@@ -109,4 +109,42 @@ const deleteItem = async (req, res, next) => {
     }
 };
 
-module.exports = { getAllItems, getItemById, createItem, updateItem, deleteItem }; // Export deleteItem
+// NEW FUNCTION TO FIND DUPLICATES - ADD THIS BLOCK
+const findDuplicates = async (req, res, next) => {
+  console.log('ITEM CONTROLLER - findDuplicates function called');
+  try {
+    const duplicates = await Item.aggregate([
+      {
+        $group: {
+          _id: "$title", // Group by the 'title' field
+          count: { $sum: 1 }, // Count documents in each group
+          ids: { $push: "$_id" } // Store the _id of each document in the group
+        }
+      },
+      {
+        $match: {
+          count: { $gt: 1 } // Filter for groups where the count is greater than 1 (i.e., duplicates)
+        }
+      },
+      {
+        $sort: {
+          count: -1 // Optional: Sort by count in descending order to see most duplicated first
+        }
+      }
+    ]);
+    res.status(200).json(duplicates);
+  } catch (error) {
+    console.error('ITEM CONTROLLER - Error finding duplicates:', error);
+    next(error); // Pass errors to the error handling middleware
+  }
+};
+
+// Update module.exports to include the new function
+module.exports = {
+  getAllItems,
+  getItemById,
+  createItem,
+  updateItem,
+  deleteItem,
+  findDuplicates // <--- ADD THIS HERE
+};
